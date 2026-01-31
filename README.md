@@ -1,6 +1,6 @@
 # KTL-NG Tutorials
 
-Test application for developing and demonstrating [KTL-NG](https://github.com/cortexrd/KTLNG) features.
+Test application for developing and demonstrating [KTLNG](https://github.com/cortexrd/KTLNG) features.
 
 ## Purpose
 
