@@ -75,8 +75,8 @@ function initApp() {
         enableDebugMode: true
     });
 
-    // Set up event handlers
-    ktl.events.on('knack-scene-render.any', (event, data) => {
+    // Set up event handlers (native Next-Gen events)
+    Knack.on('page:render', (data) => {
         console.log('Page rendered:', data);
     });
 }

@@ -9,9 +9,9 @@ window.APP_VERSION = '0.1.0';
 window.KnackApp = function (params = {}) {
     const { ktlVersion, lsShortName } = params;
 
-    console.log('KTL-NG Tutorials starting...');
-    console.log('KTL Version:', ktlVersion);
-    console.log('Storage prefix:', lsShortName);
+    // console.log('KTL-NG Tutorials starting...');
+    // console.log('KTL Version:', ktlVersion);
+    // console.log('Storage prefix:', lsShortName);
 
     //Wait for KTL to be ready
     document.addEventListener('ktl:ready', function (e) {
@@ -35,14 +35,14 @@ function initApp() {
         enableDebugMode: true
     });
 
-    //Set up page render handler
-    ktl.events.on('knack-scene-render.any', function (event, data) {
-        console.log('Page rendered (via events abstraction):', data);
+    //Set up page render handler (native Next-Gen events)
+    Knack.on('page:render', function (data) {
+        console.log('Page rendered:', data);
     });
 
-    //Set up view render handler
-    ktl.events.on('knack-view-render.any', function (event, data) {
-        console.log('View rendered (via events abstraction):', data);
+    //Set up view render handler (native Next-Gen events)
+    Knack.on('view:render', function (data) {
+        console.log('View rendered:', data);
     });
 
     //Log initialization
