@@ -17,10 +17,10 @@ This Knack application serves as:
 
 ### 1. Start Local Server
 
-Start a local HTTP server on port 3000 serving `C:\code`:
+Start the local file server on port 3000:
 
 ```bash
-cd C:\code && python -m http.server 3000
+node C:\code\Lib\KTLNG\NodeJS\NodeJS_FileServer.js
 ```
 
 ### 2. Knack Builder Configuration
@@ -29,17 +29,23 @@ In your Knack app's **Settings > API & Code > JavaScript**, add:
 
 ```javascript
 Knack.ready().then(async () => {
-    await Knack.loadScript('http://localhost:3000/Lib/KTLNG/KTL_Loader.js');
+    await Knack.loadScript('http://localhost:3000/Lib/KTLNG/KTL_Start.js');
+    loadKtl(typeof KnackApp === 'function' ? KnackApp : null);
 });
 ```
 
 ### 3. Enable Local Mode
 
-In the browser console, run `KTL.setLocalMode()` then refresh.
+Add `?ktl=local` to your app URL, e.g.:
+`https://your-app.knack.com/app#page/?ktl=local`
 
-The loader will fetch files from:
+The mode is saved to localStorage and persists across sessions.
+
+In local mode, the loader fetches:
 - `http://localhost:3000/Lib/KTLNG/KTL.js`
+- `http://localhost:3000/Lib/KTLNG/KTL.css`
 - `http://localhost:3000/KnackApps/KTL-NG Tutorials/KTL-NG Tutorials.js`
+- `http://localhost:3000/KnackApps/KTL-NG Tutorials/KTL-NG Tutorials.css` (if exists)
 
 ## File Structure
 
@@ -94,14 +100,12 @@ Add these to view titles in the Builder to test features:
 
 ## Switching Modes
 
-From browser console:
+Use URL parameter (easiest):
+- `?ktl=local` - Development (localhost:3000)
+- `?ktl=prod` - Production (CDN)
+- `?ktl=dev` - Development version from CDN
 
-```javascript
-KTL.setLocalMode()   // Development (localhost:3000)
-KTL.setProdMode()    // Production (CDN)
-KTL.setDevMode()     // Development version from CDN
-KTL.getMode()        // Check current mode
-```
+The mode persists in localStorage after first use.
 
 ## Related
 
